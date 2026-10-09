@@ -160,25 +160,3 @@ customer-intelligence-platform/
 
 The included fixed-seed synthetic run contains **5,000 customers, 38,422 events, and 6,219 transactions**. In the baseline artifacts, Logistic Regression leads churn ROC-AUC at **0.7572**; Random Forest leads value prediction with **RMSE 12.61 and R² 0.9004**. The simulated retention campaign moves conversion from **39.23% to 42.94%**, an absolute lift of **3.70 percentage points** (95% CI **0.98–6.43 pp**, p=**0.0078**). Re-run the pipeline whenever the data generator or feature logic changes; treat generated artifacts as the source of truth.
 
-## What to discuss in an interview
-
-The strongest design decision is separation of concerns: Spark handles high-volume event transformation; SQL makes analytical logic auditable; Python handles model development and statistical inference; MLflow provides experiment lineage; SHAP explains deployed predictions; FastAPI creates a serving boundary; monitoring closes the lifecycle. The synthetic dataset is reproducible so the repository runs anywhere, while the architecture can accept a real source dataset without changing those boundaries.
-
-## Resume entry
-
-**Customer Intelligence & Experimentation Platform** — *Python, PySpark, SQL, PostgreSQL, scikit-learn, XGBoost, MLflow, SHAP, FastAPI, Docker*
-
-- Built an end-to-end customer intelligence platform using **PySpark ETL and PostgreSQL/SQL** to transform behavioral and transaction data into customer features for churn prediction, 30-day value forecasting, and behavioral segmentation.
-- Developed and compared classification/regression models with reproducible evaluation, **MLflow experiment tracking**, and **SHAP explainability**, then exposed production inference through FastAPI.
-- Designed a randomized-experiment framework with confidence intervals, significance tests, power analysis, and segment-level treatment effects; added automated data-quality gates and post-deployment drift/business monitoring.
-
-## GitHub
-
-```bash
-git init
-git add .
-git commit -m "Build customer intelligence and experimentation platform"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/customer-intelligence-platform.git
-git push -u origin main
-```
