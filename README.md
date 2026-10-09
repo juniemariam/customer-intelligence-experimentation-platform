@@ -158,5 +158,81 @@ customer-intelligence-platform/
 
 ## Current reproducible baseline
 
-The included fixed-seed synthetic run contains **5,000 customers, 38,422 events, and 6,219 transactions**. In the baseline artifacts, Logistic Regression leads churn ROC-AUC at **0.7572**; Random Forest leads value prediction with **RMSE 12.61 and R² 0.9004**. The simulated retention campaign moves conversion from **39.23% to 42.94%**, an absolute lift of **3.70 percentage points** (95% CI **0.98–6.43 pp**, p=**0.0078**). Re-run the pipeline whenever the data generator or feature logic changes; treat generated artifacts as the source of truth.
+| Area | Best model / result | Metric | Baseline |
+|---|---|---|---:|
+| Dataset | Customers | Count | **5,000** |
+| Dataset | Behavioral events | Count | **38,422** |
+| Dataset | Transactions | Count | **6,219** |
+| Churn | Logistic Regression | ROC-AUC | **0.7572** |
+| Customer Value | Random Forest | RMSE | **12.61** |
+| Customer Value | Random Forest | R² | **0.9004** |
+| A/B Test | Control | Conversion | **39.23%** |
+| A/B Test | Treatment | Conversion | **42.94%** |
+| A/B Test | Treatment effect | Absolute lift | **+3.70 pp** |
+| A/B Test | Treatment effect | 95% CI | **+0.98 to +6.43 pp** |
+| A/B Test | Significance | p-value | **0.0078** |
 
+Then directly underneath, add several actual pipeline-generated graphs rather than decorative charts.
+1. A/B experiment result
+This one should absolutely be in the README:
+Retention experiment conversion
+Fixed-seed synthetic baseline. Treatment improves conversion by 3.70 percentage points.
+
+
+0%12.5%25%37.5%50%ControlTreatment
+
+
+
+
+
+
+
+
+
+95% CI for treatment effect: +0.98 to +6.43 pp; p = 0.0078
+
+
+
+
+2. Churn model comparison
+I'd generate a proper comparison from the model artifacts containing:
+Logistic Regression vs Random Forest vs XGBoost
+with:
+ROC-AUC · PR-AUC · F1
+This is more convincing than only displaying the winning 0.7572.
+3. ROC and Precision-Recall curves
+Two strong ML visuals:
+ROC Curve
+- Logistic Regression
+- Random Forest
+- XGBoost
+Precision-Recall Curve
+- Logistic Regression
+- Random Forest
+- XGBoost
+These immediately show that you understand classification evaluation beyond accuracy.
+4. SHAP feature importance
+Probably the most valuable screenshot/graph for a recruiter.
+Something like:
+Top churn drivers
+
+days_since_last_event    ████████████████
+events_30d               █████████████
+spend_30d                ███████████
+tenure_days              █████████
+sessions_30d             ███████
+...
+
+But it should be generated from the real SHAP values, not manually created.
+5. Customer segmentation
+Use the PCA output to create a scatter plot:
+PCA 2
+  │       ●●●  High-value loyal
+  │    ●●●
+  │
+  │                    ●● At risk
+  │                 ●●●●
+  │
+  │ ●● Low engagement
+  │●●●
+  └──────────────────────── PCA 1
