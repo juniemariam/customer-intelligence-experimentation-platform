@@ -205,26 +205,3 @@ The simulated randomized retention campaign increases conversion from **39.23%**
 ![Retention experiment conversion](graphs/ab_test_conversion.png)
 
 > **Reproducibility note:** These values come from `artifacts/metrics.json`, `artifacts/experiment_results.json`, and `data/processed/segments.csv`. Do not manually edit reported metrics after changing the pipeline; regenerate the artifacts and figures instead.
-
-## What to discuss in an interview
-
-The strongest design decision is separation of concerns: Spark handles high-volume event transformation; SQL makes analytical logic auditable; Python handles model development and statistical inference; MLflow provides experiment lineage; SHAP explains deployed predictions; FastAPI creates a serving boundary; monitoring closes the lifecycle. The synthetic dataset is reproducible so the repository runs anywhere, while the architecture can accept a real source dataset without changing those boundaries.
-
-## Resume entry
-
-**Customer Intelligence & Experimentation Platform** — *Python, PySpark, SQL, PostgreSQL, scikit-learn, XGBoost, MLflow, SHAP, FastAPI, Docker*
-
-- Built an end-to-end customer intelligence platform using **PySpark ETL and PostgreSQL/SQL** to transform behavioral and transaction data into customer features for churn prediction, 30-day value forecasting, and behavioral segmentation.
-- Developed and compared classification/regression models with reproducible evaluation, **MLflow experiment tracking**, and **SHAP explainability**, then exposed production inference through FastAPI.
-- Designed a randomized-experiment framework with confidence intervals, significance tests, power analysis, and segment-level treatment effects; added automated data-quality gates and post-deployment drift/business monitoring.
-
-## GitHub
-
-```bash
-git init
-git add .
-git commit -m "Build customer intelligence and experimentation platform"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/customer-intelligence-platform.git
-git push -u origin main
-```
